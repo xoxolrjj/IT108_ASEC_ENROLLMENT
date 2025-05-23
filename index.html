@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Online Enrollment System For Assumption Socio-Educational Center</title>
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #3498db;
+      --accent-color: #e74c3c;
+      --text-color: #2c3e50;
+      --background-color: #ecf0f1;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--background-color);
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .hero-section {
+      background: linear-gradient(135deg, #1a5f7a, #0c2461);
+      padding: 4rem 2rem;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 30%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(255,255,255,0.1) 0%, transparent 50%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      color: white;
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      animation: fadeInDown 1s ease-out;
+      background: linear-gradient(120deg, #ffffff, #a8e6ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-subtitle {
+      color: rgba(255,255,255,0.9);
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeInUp 1s ease-out 0.3s;
+      animation-fill-mode: both;
+      font-weight: 300;
+      letter-spacing: 1px;
+    }
+
+    .wave-bottom {
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: var(--background-color);
+      clip-path: polygon(0 50%, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h1 {
+      color: var(--primary-color);
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 3px;
+      background-color: var(--secondary-color);
+    }
+
+    .buttons {
+      margin: 2rem 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 1rem;
+      cursor: pointer;
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+    button:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    .content {
+      margin-top: 2rem;
+      display: none;
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+
+    .content.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .content h2 {
+      color: var(--secondary-color);
+      margin-bottom: 1.5rem;
+      font-size: 1.8rem;
+    }
+
+    .content p {
+      text-align: justify;
+      color: var(--text-color);
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .buttons {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      button {
+        width: 100%;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.2rem;
+      }
+
+      .hero-section {
+        padding: 3rem 1rem;
+      }
+    }
+
+    .architecture-image {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      margin: 20px auto;
+      max-width: 600px;
+    }
+
+    .architecture-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    ol {
+      text-align: left;
+      max-width: 600px;
+      margin: 20px auto;
+      padding-left: 40px;
+    }
+
+    ol li {
+      margin-bottom: 10px;
+      line-height: 1.6;
+    }
+
+    .query-section {
+      text-align: left;
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      margin: 15px 0;
+    }
+
+    .query-section h3 {
+      color: var(--secondary-color);
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+    }
+
+    pre {
+      background: #2c3e50;
+      color: #ecf0f1;
+      padding: 15px;
+      border-radius: 5px;
+      overflow-x: auto;
+      margin: 10px 0;
+      font-family: 'Consolas', 'Monaco', monospace;
+    }
+
+    .query-description {
+      color: #666;
+      font-style: italic;
+      margin: 10px 0;
+    }
+
+    .dbfiddle-link {
+      display: inline-block;
+      padding: 15px 25px;
+      background-color: var(--secondary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      margin: 20px 0;
+      transition: all 0.3s ease;
+    }
+
+    .dbfiddle-link:hover {
+      background-color: var(--primary-color);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .team-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .team-member {
+      background: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .team-member:hover {
+      transform: translateY(-5px);
+    }
+
+    .member-image {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+    }
+
+    .member-info {
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .member-name {
+      font-size: 1.2rem;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .member-role {
+      color: var(--secondary-color);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .member-description {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero-section">
+      <div class="hero-content">
+        <h1 class="hero-title">Online Enrollment System</h1>
+        <p class="hero-subtitle">Assumption Socio-Educational Center</p>
+      </div>
+      <div class="wave-bottom"></div>
+    </div>
+
+    <div class="buttons">
+      <button onclick="showContent('rationale')">Rationale</button>
+      <button onclick="showContent('objectives')">Objectives</button>
+      <button onclick="showContent('database')">Database Architecture</button>
+      <button onclick="showContent('erd')">ERD</button>
+      <button onclick="showContent('queries')">Queries</button>
+      <button onclick="showContent('dbfiddle')">DB-FIDDLE</button>
+      <button onclick="showContent('about')">About Us</button>
+    </div>
+
+    <div>
+
+    <div id="rationale" class="content">
+      <h2>Rationale</h2>
+      <p>The manual, paper-based enrollment system at the Assumption Socio-Educational Center (ASEC) has increasingly shown inefficiencies such as lost documents, delayed processing times, and data management issues. Despite partial modernization efforts through the use of platforms like Jotform, the lack of full system integration continues to burden administrative processes. Recognizing these challenges, the researchers propose the development of an Online Enrollment System. This system aims to provide a centralized, streamlined solution that will significantly reduce manual work, improve data accuracy, and enhance overall operational efficiency. This system will feature online registration, automated record updating, grade and attendance management and notification systems. By transitioning to this digital platform, ASEC can modernize its enrollment processes, ensure smoother transactions, improve accessibility for students and parents, and support school staff with efficient record-keeping and reporting tools.</p>
+     
+     <br>
+       <p>Ultimately, this system is not just an upgrade in technology; it is a vital step toward providing a faster, more reliable, and more user-friendly enrollment experience that aligns with the school's commitment to delivering quality education and service.</p>
+    </div>
+
+    <div id="objectives" class="content">
+      <h2>Objectives</h2>
+      <p>This study aims to develop an online enrollment system designed to enhance and streamline the student registration process at Assumption Socio-Educational Center (ASEC). Specifically, this study seeks to:</p>
+      <ol>
+        <li>Manage student enrollment and registration;</li>
+        <li>Manage student profile and information;</li>
+        <li>Input, update, and view student grades; and</li>
+        <li>Generate reports;</li>
+      </ol>
+    </div>
+
+    <div id="database" class="content">
+      <h2>Database Architecture</h2>
+      <div class="architecture-image">
+        <img src="dataarchitecture.jpg" alt="Database Architecture">
+      </div>
+      <p>The database architecture that we will utilize is a three tier architecture. Three-tier architecture is a widely used software design model that divides applications into three separate layers: the presentation layer, which handles the user interface; the application layer, where data processing takes place; and the data layer, which manages and stores the application's data.</p>
+
+      <br>
+      <p>The three-tier architecture divides an application into the presentation, application, and data tiers. The presentation tier acts as the user interface where users interact with the system, we will use Dart for desktop applications. The application tier, also known as the logic or middle tier, processes data collected from users by applying business rules and may modify information stored in the data tier. Meanwhile, the data tier, sometimes called the database or back-end tier, is responsible for storing and managing information using relational databases. We will utilize Firebase SQL.
+      </p>
+    </div>
+
+    <div id="erd" class="content">
+      <h2>ERD</h2>
+      <div class="architecture-image">
+        <img src="erd.png" alt="Entity Relationship Diagram">
+      </div>
+      <p>Entity Relationship Diagram showing the database structure and relationships between entities in the system.</p>
+    </div>
+
+    <div id="queries" class="content">
+      <h2>Queries</h2>
+      
+      <div class="query-section">
+        <h3>1. Manage Student Enrollment and Registration</h3>
+        
+        <div class="query-description">Enroll a student in a subject for a specific term and academic year</div>
+        <pre>
+INSERT INTO enroll (student_id, subj_id, grade, term, academic_year)
+VALUES (1, 6, NULL, 'Quarter 1', '2024-2025');
+
+SELECT * FROM enroll;</pre>
+
+        <div class="query-description">View all enrolled subjects for a student</div>
+        <pre>
+SELECT s.subj_name, e.term, e.academic_year
+FROM enroll e
+JOIN subject s ON e.subj_id = s.subj_id
+WHERE e.student_id = 1;</pre>
+      </div>
+
+      <div class="query-section">
+        <h3>2. Manage Student Profile and Information</h3>
+        
+        <div class="query-description">View student profile by student ID</div>
+        <pre>
+SELECT * FROM student WHERE student_id = 1;</pre>
+
+        <div class="query-description">Update a student's info (contact number or section)</div>
+        <pre>
+UPDATE student
+SET contact_num = '09179999999', section = 'St. Peter'
+WHERE student_id = 1;
+
+SELECT * FROM student WHERE student_id = 1;</pre>
+
+        <div class="query-description">List all students in a specific grade and section</div>
+        <pre>
+SELECT student_id, fname, lname, section
+FROM student
+WHERE grade_level = 'Grade 4' AND section = 'St. Peter';</pre>
+      </div>
+
+      <div class="query-section">
+        <h3>3. Input, Update, and View Student Grades</h3>
+        
+        <div class="query-description">Update a student's grade for a subject and term</div>
+        <pre>
+UPDATE enroll
+SET grade = 91.5
+WHERE student_id = 1 AND subj_id = 5 AND term = 'Quarter 1';</pre>
+
+        <div class="query-description">View all grades of a student</div>
+        <pre>
+SELECT s.subj_name, e.grade, e.term, e.academic_year
+FROM enroll e
+JOIN subject s ON e.subj_id = s.subj_id
+WHERE e.student_id = 1;</pre>
+      </div>
+
+      <div class="query-section">
+        <h3>4. Generate Reports</h3>
+        
+        <div class="query-description">Generate list of students enrolled in a given academic year and term</div>
+        <pre>
+SELECT DISTINCT st.student_id, st.fname, st.lname, st.grade_level, st.section
+FROM enroll e
+JOIN student st ON e.student_id = st.student_id
+WHERE e.academic_year = '2024-2025' AND e.term = 'Quarter 1';</pre>
+
+        <div class="query-description">Generate subject enrollment count per grade level</div>
+        <pre>
+SELECT gs.grade_level, s.subj_name, COUNT(e.student_id) AS enrolled_students
+FROM grade_subject gs
+JOIN subject s ON gs.subj_id = s.subj_id
+LEFT JOIN enroll e ON gs.subj_id = e.subj_id AND e.academic_year = '2024-2025'
+GROUP BY gs.grade_level, s.subj_name;</pre>
+      </div>
+    </div>
+
+    <div id="dbfiddle" class="content">
+      <h2>DB-FIDDLE</h2>
+      <p>Click the button below to access the interactive database environment where you can test and run the queries:</p>
+      <a href="https://www.db-fiddle.com/f/tEhNTYdgi7E86Sw21cfh3o/12?fbclid=IwY2xjawKdDpZleHRuA2FlbQIxMABicmlkETA3bElZcU80eldPYVhyS2FNAR4U0fAbGAzkUPWfW-s3RE46Dgo5oCBeNi7tCjqcw4fzMol0iGnl4b_NqQpQAA_aem_4TV-Q9mhUTtBIsIm0Pjhjg" target="_blank" class="dbfiddle-link">
+        Open DB-Fiddle Environment
+      </a>
+      <p>This interactive environment contains all the database tables and sample data needed to test the queries shown in the Queries section.</p>
+    </div>
+
+    <div id="about" class="content">
+      <h2>About Us</h2>
+      <div class="team-container">
+        <div class="team-member">
+          <img src="duero.jpg" alt="Team Member 1" class="member-image">
+          <div class="member-info">
+            <h3 class="member-name">Nicole Duero</h3>
+            <div class="member-role">Project Manager</div>
+            <p class="member-description">BSIT - 3B</p>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <img src="sadsad.jpg" alt="Team Member 2" class="member-image">
+          <div class="member-info">
+            <h3 class="member-name">Missy Key Sadsad</h3>
+            <div class="member-role">Member</div>
+            <p class="member-description">BSIT - 3B</p>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <img src="benliro.jpg" alt="Team Member 3" class="member-image">
+          <div class="member-info">
+            <h3 class="member-name">Rica Marie Benliro</h3>
+            <div class="member-role">Member</div>
+            <p class="member-description">BSIT - 3B</p>
+          </div>
+        </div>
+
+        <div class="team-member">
+          <img src="geraldoy.jpg" alt="Team Member 4" class="member-image">
+          <div class="member-info">
+            <h3 class="member-name">Catherine Geraldoy</h3>
+            <div class="member-role">Member</div>
+            <p class="member-description">BSIT - 3B</p>
+          </div>
+        </div>
+
+        
+        <div class="team-member">
+          <img src="teves.jpg" alt="Team Member 4" class="member-image">
+          <div class="member-info">
+            <h3 class="member-name">Beverly Anne Teves</h3>
+            <div class="member-role">Member</div>
+            <p class="member-description">BSIT - 3B</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+  <script>
+    function showContent(id) {
+      const sections = document.querySelectorAll('.content');
+      sections.forEach(section => {
+        section.style.display = 'none';
+        section.classList.remove('active');
+      });
+      const selectedSection = document.getElementById(id);
+      selectedSection.style.display = 'block';
+      // Trigger reflow
+      selectedSection.offsetHeight;
+      selectedSection.classList.add('active');
+    }
+  </script>
+</body>
+</html>
